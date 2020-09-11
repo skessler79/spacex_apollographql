@@ -35,7 +35,7 @@ margin:' 0px auto',
 display: 'flex',
 flexWrap: 'wrap',
 background:'linear-gradient(to left,#465664,#0b0808 50%,#465664)',
-minHeight:'90vh',
+minHeight:'93vh',
 overflow:'hidden',
 },
   card: {
