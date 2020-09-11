@@ -87,6 +87,7 @@ const useStyles = makeStyles(theme =>({
         padding:' 2px 16px',
         backgroundColor: '#252525',
         color: 'white',
+        fontSize:'1.225rem'
     },
     modal_footer:{
         padding:' 50px 15px',
