@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{ useState, Fragment } from 'react';
 import Head from 'next/head'
 import {
     ApolloClient,
@@ -8,27 +8,32 @@ import {
     gql
   } from "@apollo/client";
 import { makeStyles } from '@material-ui/core/styles';
-import RocketInfo from '../components/rocketInfo';
+import LaunchInfo from '../components/launchInfo';
 import Loading from '../components/loading';
 import Navbar from '../components/navBar';
-import RocketCard from '../components/rocketCard';
+import LaunchCard from '../components/launchCard';
+
+const siteTitle = 'SpaceX Rockets and Launches'
 
 const client = new ApolloClient({
     uri: "https://api.spacex.land/graphql/",
     cache: new InMemoryCache()
 });
 
-const siteTitle = 'SpaceX Rockets and Launches'
-
 const Rockets_list = gql`
     {
-        rockets {
-            name
-            country
+        launches(limit: 40) {
+            mission_name
+            rocket {
+                rocket_name
+            }
+            launch_date_utc
             id
+            launch_success
         }
     }
 `
+
 const useStyles = makeStyles(theme =>({
 root:{
 margin:' 0px auto',
@@ -109,32 +114,33 @@ function Rockets () {
 
  return ( 
   <div className={styles.root} >
-{ data.rockets.map(({ name, country, id }) => (
-                <RocketCard 
-                name={name}
-                country={country}
+{ data.launches.map(({ mission_name, rocket, id, launch_success }) => (
+                <LaunchCard 
+                name={mission_name}
+                rocket={rocket}
+                launch_success={launch_success}
                 id={id}
                 key={id}
                 click={openModal(id)}
                 />
        ))}
-    {state ?<RocketInfo id={state} close={closeModal}/> : null}
+    {state ?<LaunchInfo id={state} close={closeModal}/> : null}
 
       </div>)
 }
 
-export default function Home()
+export default function Launches()
 {
-    var test = "Rockets"
     return(
         <div>
             <Head>
                 <title>{siteTitle}</title>
             </Head>
-            <Navbar name="Rockets"/>
+            <Navbar name="Launches"/>
             <ApolloProvider client={client}>
-                <Rockets name={test} />
+                <Rockets />
             </ApolloProvider>
-        </div>  
+        </div>
+        
     );
 }
