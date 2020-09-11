@@ -122,7 +122,6 @@ export default function Navbar({}) {
         <nav class="flex items-center justify-between flex-wrap bg-gray-900 p-6">
             <div class="flex items-center flex-shrink-0 text-white mr-6">
                 <img src="https://i.imgur.com/e6Q1hgl.png" alt="Image not found"/>
-                <span class="font-semibold text-xl tracking-tight"></span>
             </div>
             <div class="block lg:hidden">
                 <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
